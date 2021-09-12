@@ -530,6 +530,8 @@ solution2:
 
 ### 59. 螺旋矩阵 II
 
+用`top`, `bottom`, `left`, `right`分别代表四条边界，指针遍历边界内的数（不含边界），到达边界则将指针回退一位。
+
 ```java
 class Solution {
     public int[][] generateMatrix(int n) {
@@ -539,42 +541,47 @@ class Solution {
         int[][] mat = new int[n][n];
 
         int left = -1;
-        int right = n - 1;
+        int right = n;
         int top = -1;
-        int bottom = n - 1;
+        int bottom = n;
+        int i = 0;
+        int j = 0;
 
         mat[0][0] = 1;
-        
-        while(){
+
+        while(right - left > 1 || bottom - top > 1){
             //go right =>
-            for(j; j < right; ++j){
+            for(j += 1; j < right; ++j){
                 mat[i][j] = ++num;
             }
+            j--;
             top++;
 
-            //go down
-            for(i; i < bottom; ++i){
+            //go down \/
+            for(i += 1; i < bottom; ++i){
                 mat[i][j] = ++num;
             }
+            i--;
             right--;
 
             //go left <=
-            for(j; j > left; --j){
+            for(j -= 1; j > left; --j){
                 mat[i][j] = ++num;
             }
+            j++;
             bottom--;
 
-            //go up
-            for(i; i > top; --i){
+            //go up /\
+            for(i -= 1; i > top; --i){
                 mat[i][j] = ++num;
             }
+            i++;
             left++;
         }
-
-
-
+        return mat;
     }
 }
 ```
+
 
 
