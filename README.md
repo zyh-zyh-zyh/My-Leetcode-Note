@@ -1088,7 +1088,7 @@ class Solution {
 
 ### 24. 两两交换链表中的节点
 
-1. solution1.
+1. solution 1:
 
 ```java
 /**
