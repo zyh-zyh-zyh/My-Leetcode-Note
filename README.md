@@ -1088,7 +1088,7 @@ class Solution {
 
 ### 24. 两两交换链表中的节点
 
-1. solution 1:
+1. Solution 1:
 
 ```java
 /**
@@ -1136,6 +1136,67 @@ class Solution {
 2. Solution 2:
 
    递归 **【TODO】**
+
+```java
+
+```
+
+### 19. 删除链表的倒数第 N 个结点
+
+给你一个链表，删除链表的倒数第 `n` 个结点，并且返回链表的头结点。
+
+**进阶：**你能尝试使用一趟扫描实现吗？
+
+1. Solution 1:
+
+   满足**进阶**单次遍历要求。
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode[] nodeArray = new ListNode[30];
+        //dummyHead 节点
+        ListNode start = new ListNode(-1, head);
+
+        //计数 链表长度count
+        int count = 0;
+        //指针节点 tmp
+        ListNode tmp = new ListNode(-1, head);
+
+        //写入数组
+        while(tmp.next != null){
+            nodeArray[count++] = tmp.next;
+            tmp = tmp.next;
+        }
+
+        int index = count - n;
+        if(index == 0){
+            start.next = nodeArray[0].next;
+        }
+        else if(index < 29){
+            nodeArray[index - 1].next = nodeArray[index + 1];
+        }
+
+        //index == 29
+        else{
+            nodeArray[index - 1].next = null;
+        }
+        return start.next;
+    }
+}
+```
+
+2. 双指针 **【TODO】**
 
 ```java
 
