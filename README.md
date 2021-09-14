@@ -602,7 +602,7 @@ class Solution {
 
 ### 707.设计链表
 
-1. new一个dummyHead的方法：
+1. new 一个 dummyHead 的方法：
 
    遇到的特殊情况：
 
