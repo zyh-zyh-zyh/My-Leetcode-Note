@@ -1235,3 +1235,125 @@ public class Solution {
 }
 ```
 
+### 142. 环形链表II
+
+* **【TODO】** 递归:
+
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+
+        if(head == null){return null;}
+        if(head.next == head){return head;}
+        else if(head.next == null){return null;}
+
+        ListNode target = new ListNode();
+        target.next = head;
+
+        while(target != null){
+            ListNode tmp = target;
+            while(true){
+                //下一个节点
+                ListNode result = detectCycle(tmp.next);
+                if(result != null){
+                    return result;
+                }
+                //链表结束
+                if(tmp.next == null){
+                    return null;
+                }
+                //链表循环
+                else if(tmp.next == target){
+                    return tmp.next;
+                }
+                else{
+                    tmp = tmp.next;
+                }
+            }
+        }
+    }
+}
+```
+
+* **【TODO】** 二分法
+
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+
+        if(head == null){return null;}
+        else if(head.next == head){return head;}
+        else if(head.next == null){return null;}
+        else if(head.next.next == null){return null;}
+
+        // ListNode left = head;
+        ListNode tmp = head;
+        ListNode target = head;
+        int maxOfLens = 10;
+        int lensOfCycle = 0;
+        
+        //初始化mid
+        for(int i = 0; i < maxOfLens; i++){
+            if(tmp.next == null){
+                return null;
+            }
+            else{
+                tmp = tmp.next;
+            }
+        }
+        target = tmp;
+        //计算是否成环，
+        for(int i = 0; i < maxOfLens; i++){
+            if(tmp.next == null){
+                return null;
+            }
+            else if(tmp.next = target){
+                lensOfCycle = i;
+                break;
+            }
+        }
+
+        
+
+        while(){
+            for(int i = 0; i < 10000; i++){
+                if(tmp.next == null){
+                    return null;
+                }
+                //
+                else if(tmp.next == mid){
+                }
+
+            }
+
+        }
+
+    
+    }
+
+    public boolean
+
+}
+```
