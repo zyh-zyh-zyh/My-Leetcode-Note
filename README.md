@@ -809,8 +809,6 @@ public class Solution {
             }
         }
 
-        
-
         while(){
             for(int i = 0; i < 10000; i++){
                 if(tmp.next == null){
@@ -819,12 +817,8 @@ public class Solution {
                 //
                 else if(tmp.next == mid){
                 }
-
             }
-
         }
-
-    
     }
 
     public boolean
