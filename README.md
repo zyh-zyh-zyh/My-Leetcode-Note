@@ -57,66 +57,7 @@
 
 ### [19. 删除链表的倒数第 N 个结点](./Solutions/19.删除链表的倒数第N个结点.md)
 
-### 面试题 02.07. 链表相交
-
-```java
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
-public class Solution {
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        int lenA = getLength(headA);
-        int lenB = getLength(headB);
-
-        ListNode tmpA = new ListNode();
-        tmpA.next = headA;
-        ListNode tmpB = new ListNode();
-        tmpB.next = headB;
-
-        //对齐两个List
-        if(lenA - lenB > 0){
-            for(int i = 0; i < lenA - lenB; i++){
-                tmpA = tmpA.next;
-            }
-        }
-        else if(lenA - lenB < 0){
-            for(int i = 0; i < lenB - lenA; i++){
-                tmpB = tmpB.next;
-            }
-        }
-
-        tmpA = tmpA.next;
-        tmpB = tmpB.next;
-
-        while(tmpA != null){
-            if(tmpA == tmpB){
-                return tmpA;
-            }
-            tmpA = tmpA.next;
-            tmpB = tmpB.next;
-        }
-        return null;
-    }
-
-    public int getLength(ListNode head){
-        if(head == null)    {return 0;}
-        int count = 1;
-        while(head.next != null){
-            head = head.next;
-            count++;
-        }
-        return count;
-    }
-}
-```
+### [面试题 02.07. 链表相交](./Solutions/面试题02.07.链表相交.md)
 
 ### [142. 环形链表II](./Solutions/142.环形链表II.md)
 
