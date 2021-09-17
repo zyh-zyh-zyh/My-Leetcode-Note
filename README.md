@@ -8,7 +8,10 @@
 
 * 题解语言：`Java`
 
+&nbsp;
+
 ---
+&nbsp;
 
 ## 🔢数 组
 
@@ -36,43 +39,15 @@
 
 ### [59. 螺旋矩阵 II](./Solutions/59.螺旋矩阵II.md)
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## ⛓️链 表
 
-### 203. 移除链表元素
-
-```java
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution {
-    public ListNode removeElements(ListNode head, int val) {
-        ListNode start = new ListNode(0, head);
-        ListNode result = new ListNode(0, start);
-        while(start.next != null){
-            if(start.next.val == val){
-                start.next = start.next.next;
-            }
-            else if(start.next != null){
-                start = start.next;
-            }
-            else{
-                break;
-            }
-        }
-
-        return result.next.next;
-    }
-}
-```
+### [203. 移除链表元素](./Solutions/203.移除链表元素.md)
 
 ### 707. 设计链表
 
@@ -767,7 +742,11 @@ public class Solution {
 }
 ```
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 🧾哈 希 表
 
@@ -813,49 +792,81 @@ public class Solution {
 
 * **【TODO】**
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 🔡字 符 串
 
 * **【TODO】**
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 🎢栈 与 队 列
 
 * **【TODO】**
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 🌳树
 
 * **【TODO】**
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 🔙回 溯
 
 * **【TODO】**
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 💯贪 心
 
 * **【TODO】**
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 📡动 态 规 划
 
 * **【TODO】**
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 🧩图 论
 
 * **【TODO】**
 
+&nbsp;
+
 ---
+
+&nbsp;
 
 ## 🎯高 级 数 据 结 构
 
