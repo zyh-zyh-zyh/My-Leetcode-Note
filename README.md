@@ -53,60 +53,7 @@
 
 ### [206. 反转链表](./Solutions/206.反转链表.md)
 
-### 24. 两两交换链表中的节点
-
-1. Solution 1:
-
-```java
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution {
-    public ListNode swapPairs(ListNode head) {
-        //len < 2
-        if(head == null){return head;}
-        if(head.next == null){return head;}
-
-        //
-        //定义tmp为每次两两交换中 left node 的前一个node
-        ListNode tmp = new ListNode(0, head);
-        ListNode start = new ListNode(0, head.next);
-        ListNode left = head;
-        ListNode right = head.next;
-
-        while(true){
-
-            left.next = right.next;
-            right.next = left;
-            tmp.next = right;
-
-            tmp = left;
-            left = tmp.next;
-            if(left == null){break;}
-            right = left.next;
-
-            if(right == null){break;}
-        }
-        return start.next;
-
-    }
-}
-```
-
-2. Solution 2:
-
-   递归 **【TODO】**
-
-```java
-
-```
+### [24. 两两交换链表中的节点](./Solutions/24.两两交换链表中的节点.md)
 
 ### [19. 删除链表的倒数第 N 个结点](./Solutions/19.删除链表的倒数第N个结点.md)
 
