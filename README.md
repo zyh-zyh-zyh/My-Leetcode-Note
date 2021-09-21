@@ -123,7 +123,7 @@
 
 ### [剑指Offer58-II. 左旋转字符串](./Solutions/剑指Offer58-II.左旋转字符串.md)
 
-### 28. 实现 strStr()
+### [28. 实现 strStr()](./Solutions/28.实现strStr().md)
 
 ### 459. 重复的子字符串
 
