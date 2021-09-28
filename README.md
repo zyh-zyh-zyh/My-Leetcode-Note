@@ -198,7 +198,257 @@
 
 ### 145. 二叉树的后序遍历
 
-### 94. 二叉树的中序遍历
+### 94.二叉树的中序遍历
+
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList();
+        inorder(root, list);
+        return list;
+    }
+
+    public void inorder(TreeNode root, List<Integer> list) {
+        if (root == null) {return;}
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
+    }
+}
+```
+
+* 堆栈
+
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList();
+        Stack<TreeNode> st = new Stack();
+        HashSet<TreeNode> seenSet = new HashSet();
+
+        if (root == null) {return ans;}
+        st.push(root);
+        while (!st.empty()) {
+            //先 pop() 取出来 
+            TreeNode curNode = st.pop();
+            //若见过 则直接添加至 ans 
+            if (seenSet.contains(curNode)) {
+                ans.add(curNode.val);
+                continue;
+            }
+            //若未见过 则按 右中左顺序推回栈中
+            seenSet.add(curNode);
+
+            if (curNode.right != null) st.push(curNode.right);
+            st.push(curNode);
+            if (curNode.left != null) st.push(curNode.left);            
+        }
+        return ans;
+    }
+}
+```
+
+### 102. 二叉树的层序遍历
+
+* 双 stack
+
+```java
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        Stack<TreeNode> st = new Stack();
+        Stack<TreeNode> trans = new Stack();
+        List<List<Integer>> ans = new ArrayList();
+
+        if (root == null) {return ans;}
+        st.push(root);
+
+        while(!st.empty() || !trans.empty()) {
+            while (!st.empty()) {
+                trans.push(st.pop());
+            }
+            List<Integer> tmpList = new ArrayList();
+            while (!trans.empty()) {
+                TreeNode curNode = trans.pop();
+                tmpList.add(curNode.val);
+                if (curNode.left != null) st.push(curNode.left);
+                if (curNode.right != null) st.push(curNode.right);
+            }
+            ans.add(tmpList);
+        }
+        return ans;
+    }
+}
+```
+
+* 单stack
+
+```java
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+
+        List<List<Integer>> ans = new ArrayList();
+        Queue<TreeNode> que = new LinkedList();
+
+        if (root == null) {return ans;}
+        que.add(root);
+        while (!que.isEmpty()) {
+            int count = que.size();
+            List<Integer> tmpList = new ArrayList();
+            for (int i = 0; i < count; i++) {
+                TreeNode tmpNode = que.remove();
+                if (tmpNode.left != null) que.add(tmpNode.left);
+                if (tmpNode.right != null) que.add(tmpNode.right);
+                tmpList.add(tmpNode.val);
+            }
+            ans.add(tmpList);
+        }
+        return ans;
+    }
+}
+```
+
+### 226. 翻转二叉树
+
+```java
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return root;
+        inver(root);
+        return root;
+    }
+
+    public void inver(TreeNode curNode) {
+        if (curNode == null) return;
+        // if (curNode.left == null && curNode.right == null) {return;}
+        TreeNode tmpNode = curNode.left;
+        curNode.left = curNode.right;
+        curNode.right = tmpNode;
+        inver(curNode.left);
+        inver(curNode.right);
+    }
+}
+```
+
+
+
+### 101. 对称二叉树
+
+递归如何做
+
+【TODO】
+
+循环如何做
+
+* 栈
+
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
+        Queue<TreeNode> que1 = new LinkedList();
+        Queue<TreeNode> que2 = new LinkedList();
+        if ((root.left == null) != (root.right == null)) return false;
+        if (root.left == null && root.right == null) return true;
+        que1.add(root.left);
+        que2.add(root.right);
+        int size1 = que1.size();
+        int size2 = que2.size();
+        while (size1 == size2 && !que1.isEmpty() && !que2.isEmpty()) {
+            for (int i = 0; i < size1; i++) {
+                TreeNode tmp1 = que1.remove();
+                TreeNode tmp2 = que2.remove();
+                if (tmp1.val != tmp2.val) return false;
+
+                if ((tmp1.left == null) != (tmp2.right == null)) return false;
+                if ((tmp2.left == null) != (tmp1.right == null)) return false;
+
+                if (tmp1.left != null) que1.add(tmp1.left);
+                if (tmp2.right != null) que2.add(tmp2.right);
+
+                if (tmp1.right != null) que1.add(tmp1.right);
+                if (tmp2.left != null) que2.add(tmp2.left);
+            }
+            size1 = que1.size();
+            size2 = que2.size();
+        }
+        if (size1 != size2) return false;
+        return true;
+    }
+}
+```
+
+* Leetcode
+
+```java
+class Solution {
+	public boolean isSymmetric(TreeNode root) {
+		if(root==null || (root.left==null && root.right==null)) {
+			return true;
+		}
+		//用队列保存节点
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		//将根节点的左右孩子放到队列中
+		queue.add(root.left);
+		queue.add(root.right);
+		while(queue.size()>0) {
+			//从队列中取出两个节点，再比较这两个节点
+			TreeNode left = queue.removeFirst();
+			TreeNode right = queue.removeFirst();
+			//如果两个节点都为空就继续循环，两者有一个为空就返回false
+			if(left==null && right==null) {
+				continue;
+			}
+			if(left==null || right==null) {
+				return false;
+			}
+			if(left.val!=right.val) {
+				return false;
+			}
+			//将左节点的左孩子， 右节点的右孩子放入队列
+			queue.add(left.left);
+			queue.add(right.right);
+			//将左节点的右孩子，右节点的左孩子放入队列
+			queue.add(left.right);
+			queue.add(right.left);
+		}
+		
+		return true;
+	}
+}
+
+作者：wang_ni_ma
+链接：https://leetcode-cn.com/problems/symmetric-tree/solution/dong-hua-yan-shi-101-dui-cheng-er-cha-shu-by-user7/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+
+
+### 104. 二叉树的最大深度
+
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        int layer = 0;
+
+        Queue<TreeNode> que = new LinkedList();
+        que.add(root);
+
+        while (!que.isEmpty()) {
+            layer++;
+            int size = que.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode curNode = que.remove();
+                if (curNode.left != null) {que.add(curNode.left);}
+                if (curNode.right != null) {que.add(curNode.right);}
+            }
+        }
+        return layer;
+    }
+}
+```
+
 
 
 
