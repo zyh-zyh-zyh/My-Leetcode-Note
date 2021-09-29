@@ -450,6 +450,251 @@ class Solution {
 ```
 
 
+* 递归解法
+
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+}
+```
+
+
+
+### 559.n叉树的最大深度
+
+
+
+### 111. 二叉树的最小深度
+
+```java
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNode> que = new LinkedList();
+        que.add(root);
+        int depth = 1;
+        while (!que.isEmpty()) {
+            int size = que.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode curNode = que.remove();
+                if (curNode.left == null && curNode.right == null) return depth;
+                if (curNode.left != null) que.add(curNode.left);
+                if (curNode.right != null) que.add(curNode.right);
+            }
+            depth++;
+        }
+        return -1;
+    }
+}
+```
+
+
+
+### 222.完全二叉树的节点个数
+
+
+
+```java
+class Solution {
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNode> que = new LinkedList();
+        que.add(root);
+        int count = 0;
+        while (!que.isEmpty()) {
+            TreeNode curNode = que.remove();
+            count++;
+            if (curNode.left != null) que.add(curNode.left);
+            if (curNode.right != null) que.add(curNode.right);           
+        }
+        return count;
+    }
+}
+```
+
+
+
+### 110. 平衡二叉树
+
+判断是否为平衡二叉树
+
+```java
+class Solution {    public boolean isBalanced(TreeNode root) {        if (root == null) return true;        Queue<TreeNode> que = new LinkedList();        que.add(root);        while (!que.isEmpty()) {            TreeNode cur = que.remove();            int left = maxDepth(cur.left);            int right = maxDepth(cur.right);            int margin = left - right;            if (margin > 1 || margin < - 1) return false;            if (cur.left != null) que.add(cur.left);            if (cur.right != null) que.add(cur.right);        }        return true;    }    public int maxDepth(TreeNode root) {        if (root == null) return 0;        int left = maxDepth(root.left);        int right = maxDepth(root.right);        return Math.max(left, right) + 1;    }}
+```
+
+
+
+* 自底向上解法
+
+```java
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return height(root) >= 0;
+    }
+
+    public int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        } else {
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+    }
+}
+
+作者：LeetCode-Solution
+链接：https://leetcode-cn.com/problems/balanced-binary-tree/solution/ping-heng-er-cha-shu-by-leetcode-solution/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+
+
+### 257. 二叉树的所有路径
+
+```java
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> ans = new ArrayList();
+        if (root == null) return ans;
+        StringBuilder sb = new StringBuilder();
+        writeNode(root, ans, sb);
+        return ans;
+    }
+
+    public void writeNode(TreeNode cur, List<String> ans, StringBuilder sb) {
+        StringBuilder curSb = new StringBuilder(sb);
+        curSb.append("->" + cur.val);
+        if (cur.left == null && cur.right == null) ans.add(curSb.delete(0,2).toString());
+        if (cur.left != null) writeNode(cur.left, ans, curSb);
+        if (cur.right != null) writeNode(cur.right, ans, curSb);
+    }
+}
+```
+
+
+
+
+
+### 404. 左叶子之和
+
+```java
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) return 0;
+        int sum = 0;
+        Queue<TreeNode> que = new LinkedList();
+        que.add(root);
+        while (!que.isEmpty()) {
+            TreeNode cur = que.remove();
+            if (cur.left != null) {
+                if (cur.left.left == null && cur.left.right == null) sum += cur.left.val;
+                que.add(cur.left);
+            }
+            if (cur.right != null) que.add(cur.right);
+        }
+        return sum;
+    }
+}
+```
+
+
+
+```java
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        return root != null ? dfs(root) : 0;
+    }
+
+    public int dfs(TreeNode node) {
+        int ans = 0;
+        if (node.left != null) {
+            ans += isLeafNode(node.left) ? node.left.val : dfs(node.left);
+        }
+        if (node.right != null && !isLeafNode(node.right)) {
+            ans += dfs(node.right);
+        }
+        return ans;
+    }
+
+    public boolean isLeafNode(TreeNode node) {
+        return node.left == null && node.right == null;
+    }
+}
+
+作者：LeetCode-Solution
+链接：https://leetcode-cn.com/problems/sum-of-left-leaves/solution/zuo-xie-zi-zhi-he-by-leetcode-solution/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+
+
+
+
+### 513. 找树左下角的值
+
+```java
+class Solution {
+    public int findBottomLeftValue(TreeNode root) {
+        Queue<TreeNode> que = new LinkedList();
+        int ans = root.val;
+        que.add(root);
+        while (!que.isEmpty()) {
+            int size = que.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = que.remove();
+                if (i == 0) ans = cur.val;
+                if (cur.left != null) que.add(cur.left);
+                if (cur.right != null) que.add(cur.right);
+            }
+        }
+        return ans;
+    }
+}
+```
+
+
+
+
+
+
+
+### 112. 路径总和
+
+```java
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        HashSet<Integer> set = new HashSet();
+        calSum(root, set, 0);
+        return set.contains(targetSum);
+    }
+
+    public void calSum(TreeNode cur, HashSet<Integer> set, int curSum) {
+        if (cur.left == null && cur.right == null) {
+            curSum += cur.val;
+            set.add(curSum);
+            return;
+        }
+        if (cur.left != null) calSum(cur.left, set, curSum + cur.val);
+        if (cur.right != null) calSum(cur.right, set, curSum + cur.val);
+    }
+}
+```
+
+
+
 
 
 &nbsp;
