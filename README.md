@@ -214,28 +214,6 @@
 
 ### 222. 完全二叉树的节点个数
 
-
-
-```java
-class Solution {
-    public int countNodes(TreeNode root) {
-        if (root == null) return 0;
-        Queue<TreeNode> que = new LinkedList();
-        que.add(root);
-        int count = 0;
-        while (!que.isEmpty()) {
-            TreeNode curNode = que.remove();
-            count++;
-            if (curNode.left != null) que.add(curNode.left);
-            if (curNode.right != null) que.add(curNode.right);           
-        }
-        return count;
-    }
-}
-```
-
-
-
 ### 110. 平衡二叉树
 
 判断是否为平衡二叉树
