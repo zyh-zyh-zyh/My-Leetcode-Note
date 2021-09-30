@@ -208,37 +208,11 @@
 
 ### 104. 二叉树的最大深度
 
-### 559.n叉树的最大深度
-
-
+### 559. n叉树的最大深度
 
 ### 111. 二叉树的最小深度
 
-```java
-class Solution {
-    public int minDepth(TreeNode root) {
-        if (root == null) return 0;
-        Queue<TreeNode> que = new LinkedList();
-        que.add(root);
-        int depth = 1;
-        while (!que.isEmpty()) {
-            int size = que.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode curNode = que.remove();
-                if (curNode.left == null && curNode.right == null) return depth;
-                if (curNode.left != null) que.add(curNode.left);
-                if (curNode.right != null) que.add(curNode.right);
-            }
-            depth++;
-        }
-        return -1;
-    }
-}
-```
-
-
-
-### 222.完全二叉树的节点个数
+### 222. 完全二叉树的节点个数
 
 
 
