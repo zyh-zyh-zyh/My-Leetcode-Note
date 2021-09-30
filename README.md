@@ -216,44 +216,6 @@
 
 ### 110. 平衡二叉树
 
-判断是否为平衡二叉树
-
-```java
-class Solution {    public boolean isBalanced(TreeNode root) {        if (root == null) return true;        Queue<TreeNode> que = new LinkedList();        que.add(root);        while (!que.isEmpty()) {            TreeNode cur = que.remove();            int left = maxDepth(cur.left);            int right = maxDepth(cur.right);            int margin = left - right;            if (margin > 1 || margin < - 1) return false;            if (cur.left != null) que.add(cur.left);            if (cur.right != null) que.add(cur.right);        }        return true;    }    public int maxDepth(TreeNode root) {        if (root == null) return 0;        int left = maxDepth(root.left);        int right = maxDepth(root.right);        return Math.max(left, right) + 1;    }}
-```
-
-
-
-* 自底向上解法
-
-```java
-class Solution {
-    public boolean isBalanced(TreeNode root) {
-        return height(root) >= 0;
-    }
-
-    public int height(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftHeight = height(root.left);
-        int rightHeight = height(root.right);
-        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
-            return -1;
-        } else {
-            return Math.max(leftHeight, rightHeight) + 1;
-        }
-    }
-}
-
-作者：LeetCode-Solution
-链接：https://leetcode-cn.com/problems/balanced-binary-tree/solution/ping-heng-er-cha-shu-by-leetcode-solution/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-```
-
-
-
 ### 257. 二叉树的所有路径
 
 ```java
