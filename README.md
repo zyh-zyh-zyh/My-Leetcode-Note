@@ -198,55 +198,7 @@
 
 ### 145. 二叉树的后序遍历
 
-### 94.二叉树的中序遍历
-
-```java
-class Solution {
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList();
-        inorder(root, list);
-        return list;
-    }
-
-    public void inorder(TreeNode root, List<Integer> list) {
-        if (root == null) {return;}
-        inorder(root.left, list);
-        list.add(root.val);
-        inorder(root.right, list);
-    }
-}
-```
-
-* 堆栈
-
-```java
-class Solution {
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> ans = new ArrayList();
-        Stack<TreeNode> st = new Stack();
-        HashSet<TreeNode> seenSet = new HashSet();
-
-        if (root == null) {return ans;}
-        st.push(root);
-        while (!st.empty()) {
-            //先 pop() 取出来 
-            TreeNode curNode = st.pop();
-            //若见过 则直接添加至 ans 
-            if (seenSet.contains(curNode)) {
-                ans.add(curNode.val);
-                continue;
-            }
-            //若未见过 则按 右中左顺序推回栈中
-            seenSet.add(curNode);
-
-            if (curNode.right != null) st.push(curNode.right);
-            st.push(curNode);
-            if (curNode.left != null) st.push(curNode.left);            
-        }
-        return ans;
-    }
-}
-```
+### 94. 二叉树的中序遍历
 
 ### 102. 二叉树的层序遍历
 
