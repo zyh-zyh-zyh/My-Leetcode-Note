@@ -71,7 +71,7 @@
 
 ## 🧾哈 希 表
 
-### 基础
+### 基础：
 
 **当我们遇到了要快速判断一个元素是否出现集合里的时候，就要考虑哈希法**。
 
@@ -217,30 +217,6 @@
 ### 110. 平衡二叉树
 
 ### 257. 二叉树的所有路径
-
-```java
-class Solution {
-    public List<String> binaryTreePaths(TreeNode root) {
-        List<String> ans = new ArrayList();
-        if (root == null) return ans;
-        StringBuilder sb = new StringBuilder();
-        writeNode(root, ans, sb);
-        return ans;
-    }
-
-    public void writeNode(TreeNode cur, List<String> ans, StringBuilder sb) {
-        StringBuilder curSb = new StringBuilder(sb);
-        curSb.append("->" + cur.val);
-        if (cur.left == null && cur.right == null) ans.add(curSb.delete(0,2).toString());
-        if (cur.left != null) writeNode(cur.left, ans, curSb);
-        if (cur.right != null) writeNode(cur.right, ans, curSb);
-    }
-}
-```
-
-
-
-
 
 ### 404. 左叶子之和
 
