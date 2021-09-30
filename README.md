@@ -208,46 +208,6 @@
 
 ### 104. 二叉树的最大深度
 
-```java
-class Solution {
-    public int maxDepth(TreeNode root) {
-        if (root == null) return 0;
-        int layer = 0;
-
-        Queue<TreeNode> que = new LinkedList();
-        que.add(root);
-
-        while (!que.isEmpty()) {
-            layer++;
-            int size = que.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode curNode = que.remove();
-                if (curNode.left != null) {que.add(curNode.left);}
-                if (curNode.right != null) {que.add(curNode.right);}
-            }
-        }
-        return layer;
-    }
-}
-```
-
-
-* 递归解法
-
-```java
-class Solution {
-    public int maxDepth(TreeNode root) {
-        if (root == null) return 0;
-        int leftDepth = maxDepth(root.left);
-        int rightDepth = maxDepth(root.right);
-
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-}
-```
-
-
-
 ### 559.n叉树的最大深度
 
 
