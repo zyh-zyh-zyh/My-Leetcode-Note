@@ -204,26 +204,6 @@
 
 ### 226. 翻转二叉树
 
-```java
-class Solution {
-    public TreeNode invertTree(TreeNode root) {
-        if (root == null) return root;
-        inver(root);
-        return root;
-    }
-
-    public void inver(TreeNode curNode) {
-        if (curNode == null) return;
-        // if (curNode.left == null && curNode.right == null) {return;}
-        TreeNode tmpNode = curNode.left;
-        curNode.left = curNode.right;
-        curNode.right = tmpNode;
-        inver(curNode.left);
-        inver(curNode.right);
-    }
-}
-```
-
 ### 101. 对称二叉树
 
 递归如何做
