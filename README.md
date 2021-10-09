@@ -289,6 +289,31 @@ class Solution {
 }
 ```
 
+### 530. 二叉搜索树的最小绝对差
+
+```java
+class Solution {
+    LinkedList<Integer> log = new LinkedList();
+    public int getMinimumDifference(TreeNode root) {
+        long min = Long.MAX_VALUE;
+        inorder(root);
+        for (int i = 1; i < log.size(); i++) {
+            long value = log.get(i) - log.get(i - 1);
+            if (value < 0) value = -value;
+            if (value < min) min = value;
+        }
+        return (int)min;
+    }
+
+    public void inorder(TreeNode root) {
+        if (root == null) return;
+        inorder(root.left);
+        log.add(root.val);
+        inorder(root.right);
+    }
+}
+```
+
 &nbsp;
 
 ---
