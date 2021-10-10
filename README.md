@@ -349,6 +349,73 @@ class Solution {
 }
 ```
 
+### 236. 二叉树的最近公共祖先
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    TreeNode pub;
+    boolean foundFirst = false;
+    boolean isDone = false;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        order(root, p, q);
+        return pub;
+    }
+
+    public void order(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return;
+
+        //中序搜索 左子节点递归
+        if (!isDone) order(root.left, p, q);
+
+        if (!isDone) {
+            //未搜索到第一个节点 中序遍历
+            if (!foundFirst) {
+                //搜索第一个节点
+                if (root.val == p.val || root.val == q.val) {
+                    foundFirst = true;
+                    pub = root;
+                    if (root.left == null && root.right == null) {
+                    //是叶子结点 直接结束递归
+
+                    return;
+                    }
+                }
+            }
+            //已找到第一个节点
+            else {
+                if (isFather(pub, root)) {
+                    pub = root;
+                }
+                if (root.val == p.val || root.val == q.val) {
+                    //已经搜索到第二个节点 标记flag isDone 结束之后的所有递归
+                    isDone = true;
+                    return;
+                }
+            }
+        }
+        //右子节点中序遍历递归
+        if (!isDone) order(root.right, p, q);
+    }
+
+    //判断 son 是否在 father 的子树中
+    public boolean isFather(TreeNode son, TreeNode father) {
+        if (father == null || son == null) { return false; }
+        if (father.left != null && father.left.val == son.val) { return true; }
+        if (father.right != null && father.right.val == son.val) { return true; }
+        return isFather(son, father.left) || isFather(son, father.right);
+    }
+}
+```
+
 &nbsp;
 
 ---
