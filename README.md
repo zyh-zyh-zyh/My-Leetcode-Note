@@ -415,6 +415,38 @@ class Solution {
     }
 }
 ```
+* Solution 2
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+class Solution {
+    TreeNode ans = null;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        tra(root, p, q);
+        return ans;
+    }
+
+    public boolean tra(TreeNode cur, TreeNode p, TreeNode q) {
+        if (cur == null) return false;
+        boolean lhave = tra(cur.left, p, q);
+        boolean rhave = tra(cur.right, p, q);
+        //左右各一个节点 则该节点为目标节点
+        if (lhave && rhave) { ans = cur; }
+        //当前节点为一个，子树含一个，则该节点为目标节点
+        if ((cur == p) || (cur == q) && (lhave || rhave)) { ans = cur; }
+        return lhave || rhave || (cur == p) || (cur == q);
+    }
+}
+```
 
 ### 235. 二叉搜索树的最近公共祖先
 
