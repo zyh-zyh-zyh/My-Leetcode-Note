@@ -505,7 +505,88 @@ class Solution {
 ### 450.删除二叉搜索树中的节点
 
 ```java
+此题和669 重点在每次递归的返回值 是该节点本身（涉及删除该节点 则若需要删除 就返回删除后的替代节点）
 
+```java
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if (root == null) return null;
+
+        if (root.val == key) {
+            // 情况1、2：被删除节点没有子节点、没有左子树、没有右子树
+            if (root.left == null) return root.right;
+            if (root.right == null) return root.left;
+            // 情况3：被删除节点既有左子树，又有右子树：取右子树的最小节点取代被删除节点，并删除右子树的最小节点
+            TreeNode minNodeOfRight = findMinNode(root.right);
+            root.val = minNodeOfRight.val;
+            root.right = deleteNode(root.right, minNodeOfRight.val);
+        } else if (root.val < key) {
+            root.right = deleteNode(root.right, key);
+        } else if (root.val > key) {
+            root.left = deleteNode(root.left, key);
+        }
+
+        return root;
+    }
+
+    private TreeNode findMinNode(TreeNode node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+}
+
+作者：ar-lai
+链接：https://leetcode-cn.com/problems/delete-node-in-a-bst/solution/javachao-jian-dan-de-er-fen-sou-suo-di-g-z83v/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+* 仿写
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode deleteNode(TreeNode cur, int key) {
+        if (cur == null) return null;
+
+        if (cur.val == key) {
+            //cur 只有单子节点或无子节点
+            if (cur.left == null) return cur.right;
+            if (cur.right == null) return cur.left;
+
+            //含有两个子节点
+            TreeNode maxOfLeft = cur.left;
+            while (maxOfLeft.right != null) {
+                maxOfLeft = maxOfLeft.right;
+            }
+            cur.val = maxOfLeft.val;
+            cur.left = deleteNode(cur.left, maxOfLeft.val);
+        }
+        else if (cur.val < key) {
+            cur.right = deleteNode(cur.right, key);
+        }
+        else if (cur.val > key) {
+            cur.left = deleteNode(cur.left, key);
+        }
+        return cur;
+    }
+}
 ```
 
 ### 669. 修剪二叉搜索树
