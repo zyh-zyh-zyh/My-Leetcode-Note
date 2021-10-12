@@ -676,7 +676,37 @@ class Solution {
 ### 538.把二叉搜索树转换为累加树
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int sum = 0;
+    // right - root - left
+    public TreeNode convertBST(TreeNode root) {
+        if (root == null) return null;
+        //right
+        convertBST(root.right);
+        //root
+        sum += root.val;
+        root.val = sum;
 
+        //left
+        convertBST(root.left);
+        return root;
+    }
+}
 ```
 
 &nbsp;
