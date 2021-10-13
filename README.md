@@ -954,6 +954,50 @@ class Solution {
 }
 ```
 
+### 131. 分割回文串
+
+```java
+class Solution {
+    LinkedList<String> base = new LinkedList();
+    ArrayList<List<String>> ans = new ArrayList();
+
+    public List<List<String>> partition(String s) {
+        backtrace(s, 0);
+        return ans;
+
+    }
+
+    public void backtrace(String s, int start) {
+        //end condition
+        if (start == s.length()) {
+            ans.add(new ArrayList(base));
+            return;
+        }
+
+        //back trace body
+        for (int i = start; i < s.length(); i++) {
+            String sub = s.substring(start, i + 1);
+            if (isPalindrome(sub)) {
+                base.add(sub);
+                backtrace(s, i + 1);
+                base.removeLast();
+            }
+        }
+    }
+
+    public boolean isPalindrome(String s) {
+        int len = s.length();
+        if (len == 1) { return true; }
+        int left = 0;
+        int right = len - 1;
+        while (left < right) {
+            if (s.charAt(left++) != s.charAt(right--)) { return false; }
+        }
+        return true;
+    }
+}
+```
+
 &nbsp;
 
 ---
