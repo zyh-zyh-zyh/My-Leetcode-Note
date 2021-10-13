@@ -860,6 +860,100 @@ class Solution {
 }
 ```
 
+### 40. 组合总和II
+
+基础版 超时：
+
+```java
+class Solution {
+    LinkedList<Integer> base = new LinkedList();
+    ArrayList<List<Integer>> ans = new ArrayList();
+    HashSet<List<Integer>> set = new HashSet();
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        comb(candidates, target, 0, 0);
+        for (List<Integer> tmp : set) {
+            ans.add(tmp);
+        }
+        return ans;
+    }
+
+    public void comb(int[] candidates, int target, int sum, int start) {
+        //end condition
+        if (sum == target) {
+            ArrayList<Integer> tmp = new ArrayList(base);
+            tmp.sort(Comparator.naturalOrder());
+            if (!set.contains(tmp)) {
+                set.add(tmp);
+            }
+            return;
+        }
+        else if (sum >= target) {
+            return;
+        }
+
+        //backTracking
+        for (int i = start; i < candidates.length; i++) {
+            sum += candidates[i];
+            base.add(candidates[i]);
+            comb(candidates, target, sum, i + 1);
+            sum -= candidates[i];
+            base.removeLast();
+        }
+    }
+}
+```
+
+* 改进
+
+```java
+class Solution {
+    LinkedList<Integer> base = new LinkedList();
+    ArrayList<List<Integer>> ans = new ArrayList();
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        comb(candidates, target, 0, 0);
+        return ans;
+    }
+
+    public void comb(int[] candidates, int target, int sum, int start) {
+        boolean isBigger = false;
+        int last = 0;
+        int valueOfLast = 0;
+        //end condition
+        if (sum == target) {
+            ArrayList<Integer> tmp = new ArrayList(base);
+            ans.add(tmp);
+
+            isBigger = true;
+            return;
+        }
+        else if (sum > target) {
+            isBigger = true;
+            return;
+        }
+
+        //backTracking
+        for (int i = start; i < candidates.length; i++) {
+            if (i == start) {
+                last = start;
+                valueOfLast = candidates[last];
+            }
+            else if (candidates[i] == valueOfLast) { continue; }
+            last = i;
+            valueOfLast = candidates[last];
+            sum += candidates[i];
+            base.add(candidates[i]);
+            comb(candidates, target, sum, i + 1);
+            sum -= candidates[i];
+            base.removeLast();
+        }
+    }
+}
+```
+
 &nbsp;
 
 ---
