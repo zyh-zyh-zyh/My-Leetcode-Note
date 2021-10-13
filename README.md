@@ -745,6 +745,45 @@ class Solution {
 }
 ```
 
+
+
+### 216. 组合总和 III
+
+```java
+class Solution {
+    LinkedList<Integer> base = new LinkedList();
+    ArrayList<List<Integer>> ans = new ArrayList();
+    int sum;
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        comb(k, n, 1);
+        return ans;
+    }
+
+    public void comb(int k, int n, int start) {
+        // end condition: 满足条件
+        if (sum == n && base.size() == k) {
+            ans.add(new ArrayList(base));
+            return;
+        }
+        //end condition: 无法满足条件
+        if (sum > n || base.size() >= k) {
+            return;
+        }
+
+        //循环体
+        for (int i = start; i < 10; i++) {
+            base.add(i);
+            sum += i;
+            comb(k, n, i + 1);
+            base.removeLast();
+            sum -= i;
+        }
+    }
+}
+```
+
+
+
 &nbsp;
 
 ---
