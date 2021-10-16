@@ -1131,6 +1131,46 @@ class Solution {
 }
 ```
 
+### 90. 子集II
+
+```java
+class Solution {
+    LinkedList<Integer> base = new LinkedList();
+    ArrayList<List<Integer>> ans = new ArrayList();
+    HashSet<List<Integer>> set = new HashSet();
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        ans.add(new ArrayList());
+        set.add(new ArrayList());
+        if (nums.length == 0) {
+            return ans;
+        }
+        Arrays.sort(nums);
+
+        backtrace(nums, 0);
+        return ans;
+    }
+
+    public void backtrace(int[] nums, int start) {
+        //end condition
+        if (base.size() == nums.length) {
+            return;
+        }
+
+        //backtrace body
+        for (int i = start; i < nums.length; i++) {
+            base.add(nums[i]);
+            if (!set.contains(base)) {
+                ans.add(new ArrayList(base));
+                set.add(new ArrayList(base));
+            }
+            backtrace(nums, i + 1);
+            base.removeLast();
+        }
+
+    }
+}
+```
+
 &nbsp;
 
 ---
