@@ -1171,6 +1171,99 @@ class Solution {
 }
 ```
 
+### 491. 递增子序列
+
+```java
+class Solution {
+    ArrayList<List<Integer>> ans = new ArrayList();
+    LinkedList<Integer> base = new LinkedList();
+    HashSet<List<Integer>> set = new HashSet();
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            backtrace(nums, i, i);
+        }
+        return ans;
+    }
+
+    public void backtrace(int[] nums, int start, int cur) {
+        //end condition
+        if (cur >= nums.length) {
+            return;
+        }
+        //backtrace body
+        //第一位输入
+        if (start == cur) {
+            base.add(nums[cur]);
+            backtrace(nums, start, cur + 1);
+            base.removeLast();
+        }
+        else if ((nums[cur] >= base.peekLast())) {
+            base.add(nums[cur]);
+            if (!set.contains(base)) {
+                set.add(new ArrayList(base));
+                ans.add(new ArrayList(base));
+            }
+            backtrace(nums, start, cur + 1);
+            base.removeLast();
+        }
+        if (start != cur) {
+            backtrace(nums, start, cur + 1);
+        }
+    }
+}
+```
+
+* 去重思路：
+
+> 那如何保证没有重复呢？我们需要给「不选择」做一个限定条件，只有当**当前的元素不等于上一个选择的元素**的时候，才考虑不选择当前元素，直接递归后面的元素。因为如果有两个相同的元素，我们会考虑这样四种情况：
+>
+> 1.前者被选择，后者被选择
+> **2.前者被选择，后者不被选择**
+> **3.前者不被选择，后者被选择**
+> 4.前者不被选择，后者不被选择
+> 其中第二种情况和第三种情况其实是等价的，我们这样限制之后，**舍弃了第二种，保留了第三种**，于是达到了去重的目的。
+>
+> 作者：LeetCode-Solution
+> 链接：https://leetcode-cn.com/problems/increasing-subsequences/solution/di-zeng-zi-xu-lie-by-leetcode-solution/
+> 来源：力扣（LeetCode）
+> 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
+```java
+class Solution {
+    List<Integer> temp = new ArrayList<Integer>();
+    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        dfs(0, Integer.MIN_VALUE, nums);
+        return ans;
+    }
+
+    public void dfs(int cur, int last, int[] nums) {
+        if (cur == nums.length) {
+            if (temp.size() >= 2) {
+                ans.add(new ArrayList<Integer>(temp));
+            }
+            return;
+        }
+        if (nums[cur] >= last) {
+            temp.add(nums[cur]);
+            dfs(cur + 1, nums[cur], nums);
+            temp.remove(temp.size() - 1);
+        }
+        if (nums[cur] != last) {
+            dfs(cur + 1, last, nums);
+        }
+    }
+}
+
+作者：LeetCode-Solution
+链接：https://leetcode-cn.com/problems/increasing-subsequences/solution/di-zeng-zi-xu-lie-by-leetcode-solution/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
 &nbsp;
 
 ---
