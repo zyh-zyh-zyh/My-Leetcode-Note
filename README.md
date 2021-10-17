@@ -1411,7 +1411,29 @@ class Solution {
 
 ## 💯贪 心
 
-* **【TODO】**
+&nbsp;
+
+### 455. 分发饼干
+
+```java
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int count = 0;
+        int j = 0;
+        for (int i = 0; i < s.length && j < g.length; i++) {
+            if (s[i] >= g[j]) {
+                count++;
+                j++;
+            }
+        }
+        return count;
+    }
+}
+```
+
+
 
 &nbsp;
 
