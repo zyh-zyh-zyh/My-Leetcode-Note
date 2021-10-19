@@ -1732,6 +1732,30 @@ class Solution {
 }
 ```
 
+### 55. 跳跃游戏
+
+```java
+class Solution {
+    public boolean canJump(int[] nums) {
+        int len = nums.length;
+        if (len == 1) { return true; }
+        int curLong = 0;
+        int max = 0;
+        for (int i = 0; i < len; i++) {
+            //
+            if (max >= i) {
+                curLong = nums[i] + i;
+                max = Math.max(max, curLong);
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
 &nbsp;
 
 ---
