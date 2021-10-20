@@ -1790,6 +1790,60 @@ class Solution {
 }
 ```
 
+### 45. 跳跃游戏II
+
+```java
+class Solution {
+    public int jump(int[] nums) {
+        int len = nums.length;
+        if (len == 1) { return 0; }
+        int max = nums[0];
+        int curMax = nums[0];
+        int count = 1;
+        if (max >= len) { return 1; }
+        
+        int i = 0;
+        while (max < len - 1) {
+            for (int j = i; j <= max; j++) {
+                if (nums[j] + j > curMax) {
+                    curMax = nums[j] + j;
+                    i = j;
+                }
+            }
+            max = curMax;
+            count++;
+        }
+        return count;
+    }
+}
+```
+
+* 官方
+
+```java
+class Solution {
+    public int jump(int[] nums) {
+        int length = nums.length;
+        int end = 0;
+        int maxPosition = 0; 
+        int steps = 0;
+        for (int i = 0; i < length - 1; i++) {
+            maxPosition = Math.max(maxPosition, i + nums[i]); 
+            if (i == end) {
+                end = maxPosition;
+                steps++;
+            }
+        }
+        return steps;
+    }
+}
+
+作者：LeetCode-Solution
+链接：https://leetcode-cn.com/problems/jump-game-ii/solution/tiao-yue-you-xi-ii-by-leetcode-solution/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
 &nbsp;
 
 ---
