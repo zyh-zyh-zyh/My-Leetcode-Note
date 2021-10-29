@@ -2151,6 +2151,46 @@ class Solution {
 }
 ```
 
+### 56. 合并区间
+
+```java
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        int len = intervals.length;
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            public int compare(int[] inter1, int[] inter2) {
+                return inter1[0] - inter2[0];
+            }
+        });
+        //初始化
+        int[][] ans = new int[len][2];
+        int ansIndex = 0;
+        int left = intervals[0][0];
+        int right = intervals[0][1];
+        ans[ansIndex][0] = left;
+        ans[ansIndex][1] = right;
+
+        //
+        for (int i = 1; i < len; i++) {
+            //与上一个ans区间无重叠
+            if (intervals[i][0] > right) {
+                ansIndex++;
+                ans[ansIndex][0] = intervals[i][0];
+                ans[ansIndex][1] = intervals[i][1];
+                left = intervals[i][0];
+                right = intervals[i][1];
+            }
+            //有重叠
+            else {
+                right = Math.max(right, intervals[i][1]);
+                ans[ansIndex][1] = right;
+            }
+        }
+        return Arrays.copyOfRange(ans, 0, ansIndex + 1);
+    }
+}
+```
+
 &nbsp;
 
 ---
