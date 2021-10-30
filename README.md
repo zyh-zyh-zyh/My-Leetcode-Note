@@ -228,22 +228,6 @@
 
 ### 654. 最大二叉树
 
-```java
-class Solution {
-    public TreeNode constructMaximumBinaryTree(int[] nums) {
-        int indexOfMax = ;
-        int max = nums[indexOfMax];
-        TreeNode cur = new TreeNode(max);
-        buildTree(cur, nums);
-        buildTree(cur, nums);
-    }
-
-    public void buildTree(TreeNode cur, int[] nums) {
-
-    }
-}
-```
-
 ### 617. 合并二叉树
 
 ### 700. 二叉搜索树中的搜索
