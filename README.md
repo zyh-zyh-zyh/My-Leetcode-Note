@@ -232,23 +232,6 @@
 
 ### 700. 二叉搜索树中的搜索
 
-```java
-class Solution {
-    public TreeNode searchBST(TreeNode root, int val) {
-        if (root == null) return null;
-        Queue<TreeNode> que = new LinkedList();
-        que.add(root);
-        while (!que.isEmpty()) {
-            TreeNode cur = que.remove();
-            if (cur.val == val) return cur;
-            if (cur.left != null) que.add(cur.left);
-            if (cur.right != null) que.add(cur.right);
-        }
-        return null;
-    }
-}
-```
-
 ### 98. 验证二叉搜索树
 
 ```java
