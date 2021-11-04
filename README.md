@@ -234,28 +234,6 @@
 
 ### 98. 验证二叉搜索树
 
-```java
-class Solution {
-    public boolean isValidBST(TreeNode root) {
-        if (root == null) return true;
-        LinkedList<Integer> log = new LinkedList();
-        midTra(root, log);
-        if (log.size() < 1) return true;
-        for (int i = 1; i < log.size(); i++) {
-            if (log.get(i) <= log.get(i - 1)) return false;
-        }
-        return true;
-    }
-
-    public void midTra(TreeNode root, LinkedList log) {
-        if (root == null) return ;
-        midTra(root.left, log);
-        log.add(root.val);
-        midTra(root.right, log);
-    }
-}
-```
-
 ### 530. 二叉搜索树的最小绝对差
 
 ```java
