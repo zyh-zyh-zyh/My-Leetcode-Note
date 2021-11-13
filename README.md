@@ -248,52 +248,6 @@
 
 ### 701.二叉搜索树中的插入操作
 
-```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public TreeNode insertIntoBST(TreeNode root, int val) {
-        if (root == null) { return new TreeNode(val); }
-        TreeNode tar = new TreeNode(val);
-        locate(root, tar);
-        return root;
-    }
-
-    public void locate(TreeNode root, TreeNode tar) {
-        TreeNode cur = root;
-        if (tar.val < cur.val) {
-            if (cur.left != null) {
-                locate(cur.left, tar);
-            }
-            else {
-                cur.left = tar;
-            }
-        }
-        else if (tar.val > cur.val) {
-            if (cur.right != null) {
-                locate(cur.right, tar);
-            }
-            else {
-                cur.right = tar;
-            }
-        }
-    }
-}
-```
-
 ### 450.删除二叉搜索树中的节点
 
 ```java
