@@ -254,51 +254,6 @@
 
 ### 108.将有序数组转换为二叉搜索树
 
-```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public TreeNode sortedArrayToBST(int[] nums) {
-        TreeNode start = new TreeNode();
-        make(nums, start, 0, nums.length - 1);
-        return start;
-    }
-
-    public void make(int[] nums, TreeNode cur, int low, int high) {
-        int mid = (high + low) / 2;
-        if (low > high) { return; }
-
-        cur.val = nums[mid];
-        if (low == high) { return; }
-
-        if (high - low == 1) {
-            cur.right = new TreeNode(); 
-            make(nums, cur.right, high, high);
-            return;
-        }
-		//high - low > 1:
-        cur.left = new TreeNode(); 
-        cur.right = new TreeNode(); 
-
-        make(nums, cur.left, low, mid - 1);
-        make(nums, cur.right, mid + 1, high);
-    }
-}
-```
-
 ### 538.把二叉搜索树转换为累加树
 
 ```java
