@@ -268,32 +268,6 @@
 
 ### 77. 组合
 
-```java
-class Solution {
-    LinkedList<Integer> base = new LinkedList();
-    List<List<Integer>> ans = new ArrayList();
-    public List<List<Integer>> combine(int n, int k) {
-        comb(n, k, 1);
-        return ans;
-    }
-
-    public void comb(int n, int k, int start) {
-        if (base.size() == k) {
-            ans.add(new ArrayList(base));
-            return;
-        }
-
-        for (int i = start; i <= n; i++) {
-            base.add(i);
-            comb(n, k, i + 1);
-            base.removeLast();
-        }
-    }
-}
-```
-
-
-
 ### 216. 组合总和 III
 
 ```java
