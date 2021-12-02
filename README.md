@@ -272,46 +272,6 @@
 
 ### 17. 电话号码的字母组合
 
-```java
-class Solution {
-    ArrayList<String> ans = new ArrayList();
-    StringBuilder base = new StringBuilder();
-    String[] dic = new String[10];
-    public List<String> letterCombinations(String digits) {
-        dic[2] = "abc";
-        dic[3] = "def";
-        dic[4] = "ghi";
-        dic[5] = "jkl";
-        dic[6] = "mno";
-        dic[7] = "pqrs";
-        dic[8] = "tuv";
-        dic[9] = "wxyz";
-        combNumber(digits, 0);
-        return ans;
-    }
-
-    public void combNumber(String digits, int indexOfDigits) {
-        //end condition
-        if (indexOfDigits >= digits.length()) {
-            //防止添加空的 String 进 ans,导致结果为: [""] 而不是: []
-            if (base.length() > 0) {
-                ans.add(base.toString());
-            }
-            return;
-        }
-
-        //backtracking body
-        int callNumber = digits.charAt(indexOfDigits) - 48;
-        for (int i = 0; i < dic[callNumber].length(); i++) {
-            base.append(dic[callNumber].charAt(i));
-            combNumber(digits, indexOfDigits + 1);
-            //back
-            base.deleteCharAt(base.length() - 1);
-        }
-    }
-}
-```
-
 ### 39. 组合总和
 
 ```java
