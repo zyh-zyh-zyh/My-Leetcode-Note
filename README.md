@@ -280,60 +280,6 @@
 
 ### 93. 复原IP地址
 
-```java
-class Solution {
-    LinkedList<String> base = new LinkedList();
-    ArrayList<String> ans = new ArrayList();
-
-    public List<String> restoreIpAddresses(String s) {
-        backtrace(s, 0);
-        return ans;
-    }
-
-    public void backtrace(String s, int start) {
-        //end condition
-        if (start == s.length() && base.size() == 4) {
-            ans.add(concateIP(base));
-            return;
-        }
-        // 两种条件退出：1. 已遍历完 s 但未凑够4段ip； 2. 已凑够4段ip但s未遍历完
-        else if(start == s.length() ^ base.size() == 4) { return; }
-
-        //backtrace body
-        for (int i = start; i < s.length(); i++) {
-            if (i - start == 3) { break; }
-            String tmp = s.substring(start, i + 1);
-            int num = isIP(tmp);
-            if (num != -1) {
-                base.add(tmp);
-                backtrace(s, i + 1);
-                base.removeLast();
-            }
-        }
-    }
-
-    //判断所截出的 String 是否为合法IP，不合法则返回 -1； 合法则返回对应 int 值
-    public int isIP(String s) {
-        if (s.length() < 1) { return -1; }
-        int num = Integer.valueOf(s);
-        if (s.charAt(0) == '0' && s.length() > 1) { return -1; }
-        if (num < 0 || num > 255) { return -1; }
-        return num;
-    }
-
-    //用保存4段IP String 的 List 拼接出IP String
-    public String concateIP(LinkedList<String> base) {
-        StringBuilder sb = new StringBuilder();
-        for (String s : base) {
-            sb.append(s);
-            sb.append('.');
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        return sb.toString();
-    }
-}
-```
-
 ### 78. 子集问题
 
 * 去重问题 全集如何添加
