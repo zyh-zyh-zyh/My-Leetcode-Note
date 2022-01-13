@@ -320,24 +320,6 @@
 
 ### 455. 分发饼干
 
-```java
-class Solution {
-    public int findContentChildren(int[] g, int[] s) {
-        Arrays.sort(g);
-        Arrays.sort(s);
-        int count = 0;
-        int j = 0;
-        for (int i = 0; i < s.length && j < g.length; i++) {
-            if (s[i] >= g[j]) {
-                count++;
-                j++;
-            }
-        }
-        return count;
-    }
-}
-```
-
 ### 376. 摆动序列
 
 尝试回溯， **超时**：
