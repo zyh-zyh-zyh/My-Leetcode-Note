@@ -567,6 +567,7 @@ class Solution {
 ## 📌增补题目
 
 ### 91. 解码方法
+MySolution
 ```java
 class Solution {
     public int numDecodings(String s) {
@@ -621,4 +622,30 @@ class Solution {
     }
 }
 
+```
+
+Leetcode solution
+```java
+class Solution {
+    public int numDecodings(String s) {
+        int n = s.length();
+        int[] f = new int[n + 10];
+        f[0] = 1;
+        for(int i = 1; i <= n;i ++)
+        {
+            if(s.charAt(i - 1) != '0') f[i] = f[i - 1]; //单独解码s[i - 1]
+            if(i >= 2)
+            {
+                int t = (s.charAt(i - 2) - '0') * 10 + s.charAt(i - 1) - '0';
+                if(t >= 10 && t <= 26) f[i] += f[i - 2]; //将s[i - 2] 和 s[i - 1]组合解码
+            }
+        }
+        return f[n];
+    }
+}
+
+作者：lin-shen-shi-jian-lu-k
+链接：https://leetcode-cn.com/problems/decode-ways/solution/jie-ma-fang-fa-tu-jie-dp-zui-qing-xi-yi-97hng/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ```
