@@ -559,3 +559,66 @@ class Solution {
 ## 🎯高 级 数 据 结 构
 
 * **【TODO】**
+&nbsp;
+
+---
+
+&nbsp;
+## 📌增补题目
+
+### 91. 解码方法
+```java
+class Solution {
+    public int numDecodings(String s) {
+        int len = s.length();
+        int[] dp = new int[len + 1];
+        dp[0] = 1;
+        for (int i = 1; i < len + 1; i++) {
+            if (i > 1 && dp[i - 1] == 0) {
+                dp[i] = 0;
+                continue;
+            }
+            char cur = s.charAt(i - 1);
+            //第一位字母
+            if (i == 1) {
+                if (cur != '0') {
+                    dp[i] = 1;
+                }
+            }
+            //非第一位字母
+            else {
+                char pre = s.charAt(i - 2);
+                //0
+                if (cur == '0') {
+                    if (pre == '1' || pre == '2') {
+                        dp[i] = dp[i - 2];
+                    }
+                    else {
+                        dp[i] = 0;
+                    }
+                }
+                // 1-6
+                else if (cur - '0' > 0 && cur - '0' < 7) {
+                    if (pre == '1' || pre == '2') {
+                        dp[i] = dp[i - 2] + dp[i - 1];
+                    }
+                    else {
+                        dp[i] = dp[i - 1];
+                    }
+                }
+                //7 8 9
+                else {
+                    if (pre == '1') {
+                        dp[i] = dp[i - 2] + dp[i - 1];
+                    }
+                    else {
+                        dp[i] = dp[i - 1];
+                    }
+                }
+            }
+        }
+        return dp[len];
+    }
+}
+
+```
